@@ -1,0 +1,17 @@
+- name: Install MySQL
+  apt:
+    name: ['mysql-server','mysql-client','python-mysqldb']
+    state: latest
+  notify: restart mysql
+
+- name: Create database
+  mysql_db:
+    name: '{{ db_name }}'
+    state: present
+
+- name: Create user for the database
+  mysql_user:
+    name: '{{ db_user }}'
+    password: '{{ db_pass }}'
+    priv: '{{ db_name }}.*:ALL'
+    state: present
