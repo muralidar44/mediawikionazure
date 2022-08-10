@@ -59,10 +59,8 @@ resource "azurerm_lb" "mediaapplb" {
  resource "azurerm_lb_backend_address_pool" "lbappbp" {
    loadbalancer_id     = azurerm_lb.mediaapplb.id
    name                = var.lbappbpname
-   lifecycle {
-    ignore_changes = [
-      # ignore changes to delegation as these seem to happen almost every deployment due to Azure configs delegation,
-    ]
+     lifecycle {
+    create_before_destroy = true
   }
  }
 
