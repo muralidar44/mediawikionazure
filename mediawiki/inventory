@@ -1,0 +1,5 @@
+[appservers]
+appvm000001 ansible_host=10.0.1.5
+appvm000003 ansible_host=10.0.1.7
+[dbserver]
+dbvm ansible_host=10.0.2.30
