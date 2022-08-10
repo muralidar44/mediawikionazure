@@ -61,8 +61,7 @@ resource "azurerm_lb" "mediaapplb" {
    name                = var.lbappbpname
    lifecycle {
     ignore_changes = [
-      # ignore changes to delegation as these seem to happen almost every deployment due to Azure configs
-      delegation,
+      # ignore changes to delegation as these seem to happen almost every deployment due to Azure configs delegation,
     ]
   }
  }
