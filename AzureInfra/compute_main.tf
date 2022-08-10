@@ -103,13 +103,7 @@ network_profile {
       load_balancer_inbound_nat_rules_ids    = [azurerm_lb_nat_pool.lbnatpool.id]
     }
   }
-    depends_on=[
-      azurerm_virtual_network.mediavnet
-    ]
 
-   tags = {
-     environment = "staging"
-   }
  }
 
  output "dbvm" {
