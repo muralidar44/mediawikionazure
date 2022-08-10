@@ -4,9 +4,6 @@ resource "azurerm_virtual_network" "mediavnet" {
   address_space 	  = [var.mediavnetcidr]
   location            = azurerm_resource_group.mediarg.location
   resource_group_name = azurerm_resource_group.mediarg.name
-  depends_on = [
-    azurerm_resource_group.mediarg
-  ]
 }
 
 # Create a subnet for VMSS appservers
@@ -15,9 +12,6 @@ resource "azurerm_subnet" "appvmsubnet" {
   address_prefixes 		= [var.mediaappsubnetcidr]
   resource_group_name   = azurerm_resource_group.mediarg.name
   virtual_network_name = azurerm_virtual_network.mediavnet.name
-  depends_on = [
-    azurerm_virtual_network.mediavnet
-  ]
 }
 
 # Create a subnet for DB VM
@@ -26,9 +20,6 @@ resource "azurerm_subnet" "dbvmsubnet" {
   address_prefixes 		= [var.mediadbsubnetcidr]
   resource_group_name   = azurerm_resource_group.mediarg.name
   virtual_network_name = azurerm_virtual_network.mediavnet.name
-  depends_on = [
-    azurerm_virtual_network.mediavnet
-  ]
 }
 
 resource "azurerm_network_interface" "dbvmnic" {
@@ -42,10 +33,7 @@ resource "azurerm_network_interface" "dbvmnic" {
      private_ip_address_allocation = "static"
      private_ip_address   = var.dbvmstaticip
    }
-    depends_on = [
-    azurerm_virtual_network.mediavnet,
-    azurerm_subnet.dbvmsubnet
-  ]
+
  }
 
 # Get a Static Public IP
@@ -67,17 +55,11 @@ resource "azurerm_lb" "mediaapplb" {
      name                 = "frontpubip"
      public_ip_address_id = azurerm_public_ip.lbpublicip.id
    }
-   depends_on=[
-    azurerm_public_ip.lbpublicip
-  ]
  }
 
  resource "azurerm_lb_backend_address_pool" "lbappbp" {
    loadbalancer_id     = azurerm_lb.mediaapplb.id
    name                = var.lbappbpname
-  depends_on=[
-    azurerm_lb.mediaapplb
-  ]
  }
 
  resource "azurerm_lb_nat_pool" "lbnatpool" {
@@ -98,9 +80,6 @@ resource "azurerm_lb_probe" "lbprobe" {
   protocol            = "Http"
   request_path        = "/"
   port                = 8080
-  depends_on=[
-    azurerm_lb.mediaapplb
-  ]
 }
 
 resource "azurerm_lb_rule" "applbrule" {
