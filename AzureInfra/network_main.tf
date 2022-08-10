@@ -83,13 +83,13 @@ resource "azurerm_lb_probe" "lbprobe" {
 }
 
 resource "azurerm_lb_rule" "applbrule" {
-   resource_group_name            = azurerm_resource_group.mediarg.name
+   //resource_group_name            = azurerm_resource_group.mediarg.name
    loadbalancer_id                = azurerm_lb.mediaapplb.id
    name                           = "http"
    protocol                       = "Tcp"
    frontend_port                  = 8080
    backend_port                   = 8080
-   backend_address_pool_id        = azurerm_lb_backend_address_pool.lbappbp.id
+   //backend_address_pool_id        = azurerm_lb_backend_address_pool.lbappbp.id
    frontend_ip_configuration_name = "frontpubip"
    probe_id                       = azurerm_lb_probe.lbprobe.id
 }
