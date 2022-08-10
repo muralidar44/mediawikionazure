@@ -30,7 +30,7 @@ resource "azurerm_network_interface" "dbvmnic" {
    ip_configuration {
      name                          = "dbvmnicconfig"
      subnet_id                     = azurerm_subnet.dbvmsubnet.id
-     private_ip_address_allocation = "static"
+     private_ip_address_allocation = "Static"
      private_ip_address   = var.dbvmstaticip
    }
 
