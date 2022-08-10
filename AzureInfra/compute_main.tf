@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "mediarg" {
-   name     = "mediawikirg"
-   location = "West US"
+   name     = "mediawikirg_b"
+   location = "West US 2"
  }
 
 resource "azurerm_virtual_machine" "dbvm" {
