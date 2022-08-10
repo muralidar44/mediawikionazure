@@ -39,6 +39,9 @@ resource "azurerm_virtual_machine" "dbvm" {
    os_profile_linux_config {
      disable_password_authentication = false
    }
+    depends_on = [
+    azurerm_network_interface.dbvmnic
+  ]
 }
  resource "azurerm_virtual_machine_scale_set" "appvmss" {
   name                = "appwebvmss"
@@ -100,6 +103,9 @@ network_profile {
       load_balancer_inbound_nat_rules_ids    = [azurerm_lb_nat_pool.lbnatpool.id]
     }
   }
+    depends_on=[
+      azurerm_virtual_network.mediavnet
+    ]
 
    tags = {
      environment = "staging"
