@@ -49,7 +49,7 @@ resource "azurerm_lb" "mediaapplb" {
    name                = var.mediaapplbname
    location            = azurerm_resource_group.mediarg.location
    resource_group_name = azurerm_resource_group.mediarg.name
-   sku                          = "Standard"
+   sku                 = "Standard"
 
    frontend_ip_configuration {
      name                 = "frontpubip"
@@ -74,7 +74,7 @@ resource "azurerm_lb" "mediaapplb" {
 }
 
 resource "azurerm_lb_probe" "lbprobe" {
-  resource_group_name = azurerm_resource_group.mediarg.name
+  //resource_group_name = azurerm_resource_group.mediarg.name
   loadbalancer_id     = azurerm_lb.mediaapplb.id
   name                = "http-probe"
   protocol            = "Http"
