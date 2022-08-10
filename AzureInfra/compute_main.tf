@@ -23,7 +23,7 @@ resource "azurerm_virtual_machine" "dbvm" {
    }
 
    storage_os_disk {
-     name              = "myosdisk"
+     name              = "myosdiskb"
      caching           = "ReadWrite"
      create_option     = "FromImage"
      managed_disk_type = "Standard_LRS"
@@ -31,7 +31,7 @@ resource "azurerm_virtual_machine" "dbvm" {
 
    
    os_profile {
-     computer_name  = "hostname"
+     computer_name  = "hostnameb"
      admin_username = "testadmin"
      admin_password = "Password1234!"
    }
@@ -44,7 +44,7 @@ resource "azurerm_virtual_machine" "dbvm" {
   ]
 }
  resource "azurerm_virtual_machine_scale_set" "appvmss" {
-  name                = "appwebvmss"
+  name                = "appwebvmssb"
   location            = azurerm_resource_group.mediarg.location
   resource_group_name = azurerm_resource_group.mediarg.name
 
