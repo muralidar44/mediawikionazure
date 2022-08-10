@@ -1,5 +1,5 @@
 [appservers]
-appwebvmssb_1 ansible_host=20.115.104.248:50001
-appwebvmssb_3 ansible_host=20.115.104.248:50003
+appvm000001 ansible_host=20.115.104.248:50001
+appvm000003 ansible_host=20.115.104.248:50003
 [dbserver]
 dbvm ansible_host=10.0.2.30
