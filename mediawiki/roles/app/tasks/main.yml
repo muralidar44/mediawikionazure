@@ -1,16 +1,16 @@
 ---
 # tasks file for app
-- apt_repository:
-    repo: ppa:nginx/stable
-- name: Update and upgrade apt packages
-  apt:
-    upgrade: yes
-    update_cache: yes
-    cache_valid_time: 86400
-- name: adding license server
-  lineinfile: dest=/etc/apt/sources.list line="deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main"
-- name: adding license server
-  lineinfile: dest=/etc/apt/sources.list line="deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main"
+# - apt_repository:
+#     repo: ppa:nginx/stable
+# - name: Update and upgrade apt packages
+#   apt:
+#     upgrade: yes
+#     update_cache: yes
+#     cache_valid_time: 86400
+# - name: adding license server
+#   lineinfile: dest=/etc/apt/sources.list line="deb http://ppa.launchpad.net/ondrej/php/ubuntu bionic main"
+# - name: adding license server
+#   lineinfile: dest=/etc/apt/sources.list line="deb-src http://ppa.launchpad.net/ondrej/php/ubuntu bionic main"
 - name: Install mediawiki dependencies
   apt:
     name: ['apache2', 'php', 'php-mysql', 'libapache2-mod-php', 'php-xml', 'php-mbstring']
