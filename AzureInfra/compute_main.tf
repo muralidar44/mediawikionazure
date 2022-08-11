@@ -59,7 +59,7 @@ resource "azurerm_virtual_machine" "dbvm" {
   }
 
   # required when using rolling upgrade policy
-  health_probe_id = azurerm_lb_probe.example.id
+  health_probe_id = azurerm_lb_probe.lbprobe.id
     sku {
     name     = "Standard_D4s_v3"
     tier     = "Standard"
