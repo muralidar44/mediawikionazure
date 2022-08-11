@@ -75,7 +75,7 @@ resource "azurerm_lb" "mediaapplb" {
  }
   resource "azurerm_lb_backend_address_pool" "lbdbbp" {
    loadbalancer_id     = azurerm_lb.mediaapplb.id
-   name                = "db""
+   name                = "db"
  }
 
  resource "azurerm_lb_nat_pool" "lbnatpool" {
