@@ -103,7 +103,7 @@ resource "azurerm_lb" "mediaapplb" {
 
 resource "azurerm_lb_nat_rule" "dbnatrule" {
   resource_group_name            = azurerm_resource_group.mediarg.name
-  loadbalancer_id                = azurerm_lb.example.id
+  loadbalancer_id                = azurerm_lb.mediaapplb.id
   name                           = "sshaccess"
   protocol                       = "Tcp"
   frontend_port                  = 52000
