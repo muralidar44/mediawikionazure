@@ -41,6 +41,7 @@ resource "azurerm_virtual_machine" "dbvm" {
    }
 
 }
+
  resource "azurerm_virtual_machine_scale_set" "appvmss" {
   name                = "appwebvmssb"
   location            = azurerm_resource_group.mediarg.location
@@ -103,11 +104,13 @@ network_profile {
   }
 
 resource "azurerm_virtual_machine_scale_set_extension" "apphealthext" {
+
 name                         = "example"
 virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.appvmss.id
 publisher ="Microsoft.ManagedServices"
 type = "ApplicationHealthLinux"
 auto_upgrade_minor_version = true
+
 }
 
 
