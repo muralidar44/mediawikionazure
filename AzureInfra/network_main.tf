@@ -36,6 +36,18 @@ resource "azurerm_network_interface" "dbvmnic" {
 
  }
 
+ resource "azurerm_network_interface_nat_rule_association" "dbnatruleasso" {
+  network_interface_id  = azurerm_network_interface.dbvmnic.id
+  ip_configuration_name = "dbvmnicconfig"
+  nat_rule_id           = azurerm_lb_nat_rule.dbnatrule.id
+}
+
+resource "azurerm_network_interface_backend_address_pool_association" "dbnicbpasso" {
+  network_interface_id    = azurerm_network_interface.dbvmnic.id
+  ip_configuration_name   = "dbvmnicconfig"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.lbdbbp.id
+}
+
 # Get a Static Public IP
 resource "azurerm_public_ip" "lbpublicip" {
    name                         = var.lbpublicipname
@@ -89,15 +101,14 @@ resource "azurerm_lb" "mediaapplb" {
   frontend_ip_configuration_name = "frontpubip"
 }
 
- resource "azurerm_lb_nat_pool" "lbnatpooldb" {
+resource "azurerm_lb_nat_rule" "dbnatrule" {
   resource_group_name            = azurerm_resource_group.mediarg.name
-  name                           = "sshdb"
-  loadbalancer_id                = azurerm_lb.mediaapplb.id
+  loadbalancer_id                = azurerm_lb.example.id
+  name                           = "sshaccess"
   protocol                       = "Tcp"
-  frontend_port_start            = 51999
-  frontend_port_end              = 52001
+  frontend_port                  = 52000
   backend_port                   = 22
-  frontend_ip_configuration_name = "frontpubip"
+  frontend_ip_configuration_name = "dboutpublicip"
 }
 
 resource "azurerm_lb_probe" "lbprobe" {
