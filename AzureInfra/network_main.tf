@@ -31,7 +31,10 @@ resource "azurerm_network_interface" "dbvmnic" {
      name                          = "dbvmnicconfig"
      subnet_id                     = azurerm_subnet.dbvmsubnet.id
      private_ip_address_allocation = "Static"
-     private_ip_address   = var.dbvmstaticip
+     private_ip_address   = var.dbvmstaticip               
+     load_balancer_backend_address_pool_ids = [azurerm_lb_backend_address_pool.lbdbbp.id]
+     load_balancer_inbound_nat_rules_ids    = [azurerm_lb_nat_pool.lbnatpooldb.id]
+     load_balancer_outbound_nat_rules_ids   = [azurerm_lb_outbound_rule.lboutboundrule.id]
    }
 
  }
