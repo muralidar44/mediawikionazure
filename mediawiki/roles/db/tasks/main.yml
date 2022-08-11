@@ -1,10 +1,14 @@
 - name: Install MySQL
   apt:
     name: ['mysql-server','mysql-client','python-mysqldb']
-    state: latest    
-    vars:
-      ansible_python_interpreter: /usr/bin/python3
+    state: latest
   notify: restart mysql
+
+- name: Install requests python package
+  pip:
+    name: requests
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
 
 - name: Create database
   mysql_db:
