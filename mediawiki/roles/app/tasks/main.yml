@@ -28,13 +28,6 @@
       owner: root
       group: root
       mode: 0775a
-- name: Create mediawork directory 
-  file:
-      path: /var/www/html/mediawiki
-      state: directory
-      owner: root
-      group: root
-      mode: 0775a
 - name: Extracting Mediawiki software
   command: tar -xzf  /tmp/mediawiki-core-1.34.4.tar.gz -C /var/lib/mediawiki
 - name: linking webroot
