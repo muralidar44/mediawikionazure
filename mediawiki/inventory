@@ -1,6 +1,6 @@
 [appservers]
-appvm000001 ansible_host=20.115.104.248 ansible_user=azureuser ansible_port=50001 ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
-appvm000003 ansible_host=20.115.104.248 ansible_user=azureuser ansible_port=50003 ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+appvm000001 ansible_host=20.115.104.248 ansible_user=azureuser ansible_port=50001 ansible_ssh_common_args= '-o StrictHostKeyChecking=no'
+appvm000003 ansible_host=20.115.104.248 ansible_user=azureuser ansible_port=50003 ansible_ssh_common_args= '-o StrictHostKeyChecking=no'
 [dbserver]
 dbvm ansible_host=10.0.2.30
 [defaults]
