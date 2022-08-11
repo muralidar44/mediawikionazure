@@ -102,7 +102,7 @@ network_profile {
       load_balancer_inbound_nat_rules_ids    = [azurerm_lb_nat_pool.lbnatpool.id]
     }
   }
-
+ }
 resource "azurerm_virtual_machine_scale_set_extension" "apphealthext" {
 
 name                         = "example"
