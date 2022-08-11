@@ -45,6 +45,14 @@ resource "azurerm_public_ip" "lbpublicip" {
    sku                          = "Standard"
 }
 
+resource "azurerm_public_ip" "lbpublicipout" {
+   name                         = "dbpubout"
+   location                     = azurerm_resource_group.mediarg.location
+   resource_group_name          = azurerm_resource_group.mediarg.name
+   allocation_method            = "Static"
+   sku                          = "Standard"
+}
+
 resource "azurerm_lb" "mediaapplb" {
    name                = var.mediaapplbname
    location            = azurerm_resource_group.mediarg.location
@@ -55,11 +63,19 @@ resource "azurerm_lb" "mediaapplb" {
      name                 = "frontpubip"
      public_ip_address_id = azurerm_public_ip.lbpublicip.id
    }
+   frontend_ip_configuration {
+     name                 = "frontpubipout"
+     public_ip_address_id = azurerm_public_ip.lbpublicipout.id
+   }
  }
 
  resource "azurerm_lb_backend_address_pool" "lbappbp" {
    loadbalancer_id     = azurerm_lb.mediaapplb.id
    name                = var.lbappbpname
+ }
+  resource "azurerm_lb_backend_address_pool" "lbdbbp" {
+   loadbalancer_id     = azurerm_lb.mediaapplb.id
+   name                = "db""
  }
 
  resource "azurerm_lb_nat_pool" "lbnatpool" {
@@ -69,6 +85,16 @@ resource "azurerm_lb" "mediaapplb" {
   protocol                       = "Tcp"
   frontend_port_start            = 50000
   frontend_port_end              = 50119
+  backend_port                   = 22
+  frontend_ip_configuration_name = "frontpubip"
+}
+
+ resource "azurerm_lb_nat_pool" "lbnatpooldb" {
+  resource_group_name            = azurerm_resource_group.mediarg.name
+  name                           = "ssh"
+  loadbalancer_id                = azurerm_lb.mediaapplb.id
+  protocol                       = "Tcp"
+  frontend_port                  = 52000  
   backend_port                   = 22
   frontend_ip_configuration_name = "frontpubip"
 }
@@ -92,6 +118,28 @@ resource "azurerm_lb_rule" "applbrule" {
    backend_address_pool_ids        = [azurerm_lb_backend_address_pool.lbappbp.id]
    frontend_ip_configuration_name = "frontpubip"
    probe_id                       = azurerm_lb_probe.lbprobe.id
+}
+resource "azurerm_lb_rule" "dblbrule" {
+   //resource_group_name            = azurerm_resource_group.mediarg.name
+   loadbalancer_id                = azurerm_lb.mediaapplb.id
+   name                           = "http"
+   protocol                       = "Tcp"
+   frontend_port                  = 80
+   backend_port                   = 80
+   backend_address_pool_ids        = [azurerm_lb_backend_address_pool.lbdbbp.id]
+   frontend_ip_configuration_name = "frontpubip"
+   probe_id                       = azurerm_lb_probe.lbprobe.id
+}
+
+resource "azurerm_lb_outbound_rule" "lboutboundrule" {
+  name                    = "dboutrule"
+  loadbalancer_id         = azurerm_lb.mediaapplb.id
+  protocol                = "Tcp"
+  backend_address_pool_id = azurerm_lb_backend_address_pool.lbdbbp.id
+
+  frontend_ip_configuration {
+    name = "dboutpublicip"
+  }
 }
 
 
