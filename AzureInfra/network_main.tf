@@ -64,7 +64,7 @@ resource "azurerm_lb" "mediaapplb" {
      public_ip_address_id = azurerm_public_ip.lbpublicip.id
    }
    frontend_ip_configuration {
-     name                 = "frontpubipout"
+     name                 = "dboutpublicip"
      public_ip_address_id = azurerm_public_ip.lbpublicipout.id
    }
  }
@@ -91,7 +91,7 @@ resource "azurerm_lb" "mediaapplb" {
 
  resource "azurerm_lb_nat_pool" "lbnatpooldb" {
   resource_group_name            = azurerm_resource_group.mediarg.name
-  name                           = "ssh"
+  name                           = "sshdb"
   loadbalancer_id                = azurerm_lb.mediaapplb.id
   protocol                       = "Tcp"
   frontend_port_start            = 51999
@@ -123,7 +123,7 @@ resource "azurerm_lb_rule" "applbrule" {
 resource "azurerm_lb_rule" "dblbrule" {
    //resource_group_name            = azurerm_resource_group.mediarg.name
    loadbalancer_id                = azurerm_lb.mediaapplb.id
-   name                           = "http"
+   name                           = "httpdb"
    protocol                       = "Tcp"
    frontend_port                  = 80
    backend_port                   = 80
