@@ -1,7 +1,8 @@
 - name: Install MySQL
   apt:
-    name: ['mysql-server','mysql-client','python-mysqldb']
+    name: ['mysql-server','mysql-client','python-mysqldb', PyMySQL', 'MySQL-python', 'mysqlclient', 'PyMySQL']
     state: latest
+    ansible_python_interpreter: /usr/bin/python
   notify: restart mysql
 
 - name: Create database
