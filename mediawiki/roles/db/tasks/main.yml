@@ -1,6 +1,6 @@
 - name: Install MySQL
   apt:
-    name: ['mysql-server','mysql-client','python-mysqldb', PyMySQL', 'MySQL-python', 'mysqlclient', 'PyMySQL']
+    name: ['mysql-server','mysql-client','python-mysqldb', 'MySQL-python', 'mysqlclient']
     state: latest    
   notify: restart mysql
 
