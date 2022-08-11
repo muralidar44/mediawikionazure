@@ -2,4 +2,4 @@
 appvm000001 ansible_host=20.115.104.248 ansible_user=azureuser ansible_port=50001 ansible_ssh_pass='Password1234!' ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
 appvm000003 ansible_host=20.115.104.248 ansible_user=azureuser ansible_port=50003 ansible_ssh_pass='Password1234!' ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
 [dbserver]
-hostnameb ansible_host=20.115.104.248 ansible_user=azureuser ansible_port=52000 ansible_ssh_pass='Password1234!' ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
+hostnameb ansible_host=20.115.104.248 ansible_user=azureuser ansible_sudo_pass='Password1234!' ansible_port=52000 ansible_ssh_pass='Password1234!' ansible_ssh_extra_args='-o StrictHostKeyChecking=no'
