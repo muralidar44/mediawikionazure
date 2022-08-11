@@ -39,9 +39,7 @@ resource "azurerm_virtual_machine" "dbvm" {
    os_profile_linux_config {
      disable_password_authentication = false
    }
-    depends_on = [
-    azurerm_network_interface.dbvmnic
-  ]
+
 }
  resource "azurerm_virtual_machine_scale_set" "appvmss" {
   name                = "appwebvmssb"
@@ -60,7 +58,7 @@ resource "azurerm_virtual_machine" "dbvm" {
   }
 
   # required when using rolling upgrade policy
-  health_probe_id = "ApplicationHealthLinux"
+  health_probe_id = azurerm_virtual_machine_scale_set_extension.apphealthext.probe_id
     sku {
     name     = "Standard_D4s_v3"
     tier     = "Standard"
@@ -104,7 +102,15 @@ network_profile {
     }
   }
 
- }
+resource "azurerm_virtual_machine_scale_set_extension" "apphealthext" {
+name                         = "example"
+virtual_machine_scale_set_id = azurerm_linux_virtual_machine_scale_set.appvmss.id
+publisher = “Microsoft.ManagedServices”
+type = “ApplicationHealthLinux”
+auto_upgrade_minor_version = true
+}
+
+
 
  output "dbvm" {
   value = azurerm_virtual_machine.dbvm
