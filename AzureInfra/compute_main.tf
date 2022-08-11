@@ -110,7 +110,7 @@ virtual_machine_scale_set_id = azurerm_virtual_machine_scale_set.appvmss.id
 publisher ="Microsoft.ManagedServices"
 type = "ApplicationHealthLinux"
 auto_upgrade_minor_version = true
-depends_on = ["azurerm_virtual_machine_scale_set.appvmss"]
+depends_on = [azurerm_virtual_machine_scale_set.appvmss]
 
 }
 
