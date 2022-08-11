@@ -94,7 +94,8 @@ resource "azurerm_lb" "mediaapplb" {
   name                           = "ssh"
   loadbalancer_id                = azurerm_lb.mediaapplb.id
   protocol                       = "Tcp"
-  frontend_port                  = 52000  
+  frontend_port_start            = 51999
+  frontend_port_end              = 52001
   backend_port                   = 22
   frontend_ip_configuration_name = "frontpubip"
 }
