@@ -18,6 +18,7 @@
 - name: Create user for the database
   community.mysql.mysql_user:  
     name: 'mediadbuser'
+    login_unix_socket: /var/run/mysqld/mysqld.sock
     password: 'Password1234!'
     priv: '*.*:ALL,GRANT'
     state: present
