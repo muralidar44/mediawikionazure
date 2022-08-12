@@ -10,18 +10,34 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
-- name: Create database
-  community.mysql.mysql_db:
-    name: 'mediadb'
-    state: present
+# - name: Create database
+#   community.mysql.mysql_db:
+#     name: 'mediadb'
+#     state: present
 
-- name: Create user for the database
-  community.mysql.mysql_user:  
-    name: 'mediadbuser'
-    login_unix_socket: /var/run/mysqld/mysqld.sock
-    password: 'Password1234!'
-    priv: '*.*:ALL,GRANT'
-    state: present
+# - name: Create user for the database
+#   community.mysql.mysql_user:  
+#     name: 'mediadbuser'
+#     login_unix_socket: /var/run/mysqld/mysqld.sock
+#     password: 'Password1234!'
+#     priv: '*.*:ALL,GRANT'
+#     state: present
+
+- name: Creating database
+  mysql_db:
+    name=mediadb 
+    state=present 
+    login_user=mediadbuser
+    login_password=Password1234! 
+  
+- name: Create db User
+  mysql_user: 
+    name=mediadbuser
+    password=Password1234! 
+    priv=*.*:ALL  
+    state=present 
+    login_user=mediadbuser 
+    login_password=Password1234!
     
 
 
