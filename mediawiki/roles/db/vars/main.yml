@@ -3,7 +3,3 @@
 db_name: 'mediadb'
 db_user: 'mediadbuser'
 db_password: 'Password1234!'
-db_type: 'mysql'
-db_server: '10.0.2.30'
-webserver_ip: '20.115.104.248'
-wiki_name: 'wikimediaweb'
