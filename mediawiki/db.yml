@@ -45,3 +45,10 @@
         login_user: 'root'
         login_password: "{{variable.db_password}}"
         state: present
+    
+    - name: Simple select query to acme db
+      community.mysql.mysql_query:
+        login_user: root
+        login_password: "{{variable.db_password}}"
+        query: GRANT ALL PRIVILEGES ON mediadb.* TO mediadbuser@'10.0.1.5' IDENTIFIED BY 'Password1234!'
+        
