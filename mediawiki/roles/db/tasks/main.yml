@@ -6,18 +6,18 @@
 
 - name: Create database
   community.mysql.mysql_db:
-    name: 'mediadb'
+    name: '{{db_name}}'
     login_user: 'root'
-    login_password: 'Password1234!'
+    login_password: '{{db_password}}'
     state: present
 
 - name: Create user for the database
   community.mysql.mysql_user:  
-    name: 'mediadbuser'    
-    password: 'Password1234!'
+    name: '{{db_user}}'    
+    password: '{{db_password}}'
     priv: '*.*:ALL,GRANT'
     login_user: 'root'
-    login_password: 'Password1234!'
+    login_password: '{{db_password}}'
     state: present
 
     
