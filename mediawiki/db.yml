@@ -6,6 +6,11 @@
   
   tasks:
 
+    - name: Load in project specific vars
+      include_vars:
+        file: "main.yml"
+        name: variable
+
     - name: Install MySQL
       apt:
         name: ['mysql-server','mysql-client','python-mysqldb']
@@ -27,16 +32,16 @@
     
     - name: Create database
       community.mysql.mysql_db:
-        name: "{{db_name}}"
+        name: "{{variable.db_name}}"
         login_user: 'root'
-        login_password: "{{db_password}}"
+        login_password: "{{variable.db_password}}"
         state: present
     
     - name: Create user for the database
       community.mysql.mysql_user:  
-        name: "{{db_user}}"  
-        password: "{{db_password}}"
+        name: "{{variable.db_user}}"  
+        password: "{{variable.db_password}}"
         priv: '*.*:ALL,GRANT'
         login_user: 'root'
-        login_password: "{{db_password}}"
+        login_password: "{{variable.db_password}}"
         state: present
