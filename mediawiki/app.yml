@@ -20,7 +20,7 @@
         name: apache2
         state: restarted
         enabled: yes
-      when: install_package.status == changed
+      when: install_package.changed
       
     - name: Download Mediawiki software
       get_url:
