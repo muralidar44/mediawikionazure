@@ -1,5 +1,0 @@
----
-# vars file for db
-db_name: 'mediadb'
-db_user: 'mediadbuser'
-db_password: 'Password1234!'
