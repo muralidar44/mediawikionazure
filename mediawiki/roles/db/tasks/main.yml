@@ -10,16 +10,18 @@
   vars:
     ansible_python_interpreter: /usr/bin/python3
 
-- name: Create user for the database
-  community.mysql.mysql_user:  
-    name: '{{ db_user }}'
-    password: '{{ db_pass }}'
-    priv: '{{ db_name }}.*:ALL'
-    state: present
-    
 - name: Create database
   community.mysql.mysql_db:
-    name: '{{ db_name }}'
+    name: 'mediadb'
     state: present
+
+- name: Create user for the database
+  community.mysql.mysql_user:  
+    name: 'mediadbuser'
+    password: 'Password1234!'
+    priv: '*.*:ALL,GRANT'
+    state: present
+    
+
 
 
