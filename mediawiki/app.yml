@@ -48,7 +48,7 @@
       command: ln -sf /var/lib/mediawiki/mediawiki-1.34.4 /var/www/html/mediawiki
       
     - name: configureapp_db
-      command: php /var/lib/mediawiki/mediawiki-1.34.4/maintenance/install.php --dbname="{{variable.db_name}}" --dbserver='10.0.2.30' --dbuser="{{variable.db_user}}" --dbpass="{{variable.db_password}}" --server="{{variable.webserver_ip}}" --scriptpath=/ --lang=en --pass='Password1234!' "{{variable.wiki_name}}" "Admin"
+      command: php /var/lib/mediawiki/mediawiki-1.34.4/maintenance/install.php --dbname="{{variable.db_name}}" --dbserver='10.0.2.30' --dbuser="{{variable.db_user}}" --dbpass="{{variable.db_password}}" --server="{{variable.webserver_ip}}" --scriptpath=/ --lang=en --pass='Password1234!' "{{variable.wiki_name}}" "Admin"      
       
     - name: Configure local settings network
       template:
