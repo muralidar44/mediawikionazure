@@ -41,7 +41,7 @@
       community.mysql.mysql_user:  
         name: "{{variable.db_user}}"  
         password: "{{variable.db_password}}"
-        priv: '*.*:ALL,GRANT'
+        priv: '*.* TO mediadbuser@10.0.1.5:ALL,GRANT'
         login_user: 'root'
         login_password: "{{variable.db_password}}"
         state: present
