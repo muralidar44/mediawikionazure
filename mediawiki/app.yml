@@ -4,5 +4,52 @@
   remote_user: azureuser
   become_user: root
 
-  roles:
-    - app
+  tasks:
+
+    - name: Install mediawiki dependencies
+      apt:
+        name: ['apache2', 'php', 'php-mysql', 'libapache2-mod-php', 'php-xml', 'php-mbstring']
+        state: latest
+      register: install_package
+    
+    - debug: 
+        msg: '{{install_package}}'
+      
+    - name: restart apache2
+      service:
+        name: apache2
+        state: restarted
+        enabled: yes
+      when: install_package.status == changed
+      
+    - name: Download Mediawiki software
+      get_url:
+        url: https://releases.wikimedia.org/mediawiki/1.34/mediawiki-core-1.34.4.tar.gz
+        dest: /tmp/mediawiki-core-1.34.4.tar.gz
+      register: download_wiki
+      
+    - name: Create work directory 
+      file:
+          path: /var/lib/mediawiki
+          state: directory
+          owner: root
+          group: root
+          mode: '0775'
+          
+    - name: Extracting Mediawiki software
+      command: tar -xzf  /tmp/mediawiki-core-1.34.4.tar.gz -C /var/lib/mediawiki
+      
+    - name: linking webroot
+      command: ln -sf /var/lib/mediawiki/mediawiki-1.34.4 /var/www/html/mediawiki
+      
+    - name: configureapp_db
+      command: php /var/lib/mediawiki/maintenance/install.php --dbname='{{db_name}}' -dbserver='10.0.2.30' --dbuser='{{db_user}}' --dbpass='{{db_password}}' --server='{{webserver_ip}}' --scriptpath=/ --lang=en --pass='Password1234!' '{{wiki_name}} "Admin"
+      
+    - name: Configure local settings network
+      template:
+        src: LocalSettings.j2
+        dest: "/var/www/html/mediawiki/LocalSettings.php"
+        owner: root
+        group: root
+        force: yes
+        mode: 0644
