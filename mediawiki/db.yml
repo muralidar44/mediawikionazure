@@ -3,6 +3,40 @@
 - hosts: dbserver
   remote_user: azureuser
   become_user: root
+  
+  tasks:
 
-  roles:
-    - db
+    - name: Install MySQL
+      apt:
+        name: ['mysql-server','mysql-client','python-mysqldb']
+        state: latest
+      register: install_package
+      
+    - debug: 
+        msg: '{{install_package}}'
+    
+    - name: config_mysql
+      command: sed -i 's/bind-address.*/bind-address=10.0.2.30/g' /etc/mysql/mysql.conf.d/mysqld.cnf
+      
+    - name: restart mysql
+      service:
+        name: mysql
+        state: restarted
+        enabled: yes
+      when: install_package.status == changed
+    
+    - name: Create database
+      community.mysql.mysql_db:
+        name: '{{db_name}}'
+        login_user: 'root'
+        login_password: '{{db_password}}'
+        state: present
+    
+    - name: Create user for the database
+      community.mysql.mysql_user:  
+        name: '{{db_user}}'    
+        password: '{{db_password}}'
+        priv: '*.*:ALL,GRANT'
+        login_user: 'root'
+        login_password: '{{db_password}}'
+        state: present
