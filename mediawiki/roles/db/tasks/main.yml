@@ -4,12 +4,6 @@
     state: latest
   notify: restart mysql
 
-- name: Install requests python package
-  pip:
-    name: requests
-  vars:
-    ansible_python_interpreter: /usr/bin/python3
-
 # - name: Create database
 #   community.mysql.mysql_db:
 #     name: 'mediadb'
