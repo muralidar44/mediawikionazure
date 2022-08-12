@@ -7,6 +7,8 @@
 - name: Create database
   community.mysql.mysql_db:
     name: 'mediadb'
+    login_user: 'root'
+    login_password: 'Password1234!'
     state: present
 
 - name: Create user for the database
@@ -14,6 +16,8 @@
     name: 'mediadbuser'    
     password: 'Password1234!'
     priv: '*.*:ALL,GRANT'
+    login_user: 'root'
+    login_password: 'Password1234!'
     state: present
 
     
