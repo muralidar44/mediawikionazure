@@ -1,9 +1,10 @@
 #Create Resource Group
 resource "azurerm_resource_group" "mediarg" {
-   name     = "mediawikirg_b"
-   location = "East US"
+   name     = var.mediavnet
+   location = var.region
  }
 
+#Create Database virtual machine
 resource "azurerm_virtual_machine" "dbvm" {
    name                  = "dbvm"
    location              = azurerm_resource_group.mediarg.location   
@@ -42,6 +43,8 @@ resource "azurerm_virtual_machine" "dbvm" {
    }
 
 }
+
+#Create VMSS for app servers
 
  resource "azurerm_virtual_machine_scale_set" "appvmss" {
   name                = "appwebvmssb"
@@ -104,18 +107,6 @@ network_profile {
     }
   }
  }
-// resource "azurerm_virtual_machine_scale_set_extension" "apphealthext" {
-
-// name                         = "example"
-// virtual_machine_scale_set_id = azurerm_virtual_machine_scale_set.appvmss.id
-// publisher ="Microsoft.ManagedServices"
-// type = "ApplicationHealthLinux"
-// auto_upgrade_minor_version = true
-// depends_on = [azurerm_virtual_machine_scale_set.appvmss]
-
-// }
-
-
 
  output "dbvm" {
   value = azurerm_virtual_machine.dbvm
