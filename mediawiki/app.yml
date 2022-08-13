@@ -59,4 +59,4 @@
         group: root
         force: yes
         mode: 0644
-      when: variable.primary != inventory_hostname
+      #when: variable.primary != inventory_hostname
