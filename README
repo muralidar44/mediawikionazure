@@ -1,3 +1,4 @@
 Please review Terraform files under Azure infra directory which are used for creating Azure infrastructure
 Please review yml files under mediawiki directory which are used for deploying mysql database on DB VM and mediawiki application on VMSS app servers
 Application URL : http://20.115.104.248//mediawiki/
+Added ADO build and release pipelines to the repository
