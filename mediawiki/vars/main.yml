@@ -5,5 +5,5 @@ db_type: "mysql"
 db_server: "10.0.2.30"
 db_name: "mediadb"
 db_user: "mediadbuser"
-db_password: $(db_password)
+db_password: "$(db_password)"
 primary: "appvm000001"
