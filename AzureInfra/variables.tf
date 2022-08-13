@@ -1,22 +1,34 @@
 variable "dbvmstaticip" {
   type        = string
-  description = "db vm static ip"
+  description = "static ip for database VM"
 }
 
-// variable "client_secret" {
-//   type        = string
-//   description = "client secret"
-// }
+variable "mediawikirg" {
+  type        = string
+  description = "this is the resource group"
+}
+
+variable "region" {
+  type        = string
+  description = "this is the region to deploy resources"
+}
+
+variable "client_secret" {
+  type        = string
+  description = "Service principle client secret"
+}
 
 variable "vmsku" {
   type        = string
   description = "Virtual machine sku"
   default     = "Standard_D4s_v5"
 }
+
 variable "linux_admin_username" {
   type        = string
   description = "linux username"  
 }
+
 variable "mediavnetcidr" {
 type = string
 description = "This is the mediawiki vnet cidr"
@@ -24,27 +36,27 @@ description = "This is the mediawiki vnet cidr"
 
 variable "mediavnet" {
 type = string
-description = "This is the mediawiki vnet"
+description = "This is the mediawiki vnet name"
 }
 
 variable "mediaappsubnet" {
 type = string
-description = "This is the mediawiki mediaappvmsubnet"
+description = "This is subnet name for application servers"
 }
 
 variable "mediaappsubnetcidr" {
 type = string
-description = "This is the mediawiki appvm subnet cidr"
+description = "This is subnet cidr for application servers"
 }
 
 variable "mediadbsubnet" {
 type = string
-description = "This is the mediawiki dbvm subnet "
+description = "This is subnet name for database serves "
 }
 
 variable "mediadbsubnetcidr" {
 type = string
-description = "This is the mediawiki db vm cidr"
+description = "This is subnet cidr for database server"
 }
 
 variable "lbpublicipname" {
