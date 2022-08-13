@@ -1,3 +1,4 @@
+#Create Resource Group
 resource "azurerm_resource_group" "mediarg" {
    name     = "mediawikirg_b"
    location = "East US"
