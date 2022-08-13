@@ -11,7 +11,7 @@ backend "azurerm" {
     storage_account_name = "tfstr8811"
     container_name       = "tfstate"
     key                 = "mediawiki_b.tfstate"
-    access_key           = var.storageaccess_key
+    #access_key           = var.storageaccess_key
 
   }
 }
