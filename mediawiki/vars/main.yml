@@ -1,7 +1,7 @@
 ---
 # vars file for app
 wiki_name: "wikimediasite"
-webserver_ip: "http://20.115.104.248/"
+webserver_ip: "https://20.115.104.248/"
 db_type: "mysql"
 db_server: "10.0.2.30"
 db_name: "mediadb"
