@@ -117,7 +117,7 @@ resource "azurerm_lb_probe" "lbprobe" {
   name                = "http-probe"
   protocol            = "Http"
   request_path        = "/"
-  port                = 8080
+  port                = 80
 }
 
 resource "azurerm_lb_rule" "applbrule" {
