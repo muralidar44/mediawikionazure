@@ -49,7 +49,7 @@ resource "azurerm_virtual_machine" "dbvm" {
 
   # automatic rolling upgrade
   automatic_os_upgrade = false
-  upgrade_policy_mode  = "Rolling"
+  upgrade_policy_mode  = "Manual"
 
   rolling_upgrade_policy {
   max_batch_instance_percent              = 50
