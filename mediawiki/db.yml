@@ -53,4 +53,4 @@
         login_user: root
         login_password: "{{variable.db_password}}"
         login_unix_socket: /var/run/mysqld/mysqld.sock
-        query: GRANT ALL PRIVILEGES ON mediadb.* TO mediadbuser@'10.0.1.5' IDENTIFIED BY "{{variable.db_password}}"
+        query: GRANT ALL PRIVILEGES ON mediadb.* TO mediadbuser@'10.0.1.5' IDENTIFIED BY 'Password1234!'
