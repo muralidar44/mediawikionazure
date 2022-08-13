@@ -1,6 +1,6 @@
 #Create Resource Group
 resource "azurerm_resource_group" "mediarg" {
-   name     = var.mediavnet
+   name     = var.mediawikirg
    location = var.region
  }
 
