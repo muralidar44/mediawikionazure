@@ -3,10 +3,10 @@ variable "dbvmstaticip" {
   description = "db vm static ip"
 }
 
-variable "client_secret" {
-  type        = string
-  description = "client secret"
-}
+// variable "client_secret" {
+//   type        = string
+//   description = "client secret"
+// }
 
 variable "vmsku" {
   type        = string
