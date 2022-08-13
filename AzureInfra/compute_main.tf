@@ -48,7 +48,7 @@ resource "azurerm_virtual_machine" "dbvm" {
   resource_group_name = azurerm_resource_group.mediarg.name
 
   # automatic rolling upgrade
-  automatic_os_upgrade = true
+  automatic_os_upgrade = false
   upgrade_policy_mode  = "Rolling"
 
   rolling_upgrade_policy {
