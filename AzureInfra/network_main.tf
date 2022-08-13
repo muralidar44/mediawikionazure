@@ -134,7 +134,7 @@ resource "azurerm_lb_rule" "applbrule" {
 resource "azurerm_lb_rule" "dblbrule" {
    //resource_group_name            = azurerm_resource_group.mediarg.name
    loadbalancer_id                = azurerm_lb.mediaapplb.id
-   name                           = "httpdb"
+   name                           = "webtrafficrule"
    protocol                       = "Tcp"
    frontend_port                  = 80
    backend_port                   = 80
