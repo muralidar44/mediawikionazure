@@ -1,0 +1,2 @@
+Please review Terraform files under Azure infra directory which are used for creating Azure infrastructure
+Please review yml files under mediawiki directory which are used for deploying mysql database on DB VM and mediawiki application on VMSS app servers
